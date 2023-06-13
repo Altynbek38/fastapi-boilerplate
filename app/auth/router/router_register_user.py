@@ -1,33 +1,37 @@
 from fastapi import Depends, HTTPException, status
-
-from app.utils import AppModel
+from pydantic import BaseModel
 
 from ..service import Service, get_service
 from . import router
 
 
-class RegisterUserRequest(AppModel):
+class RegisterUserRequest(BaseModel):
     email: str
     password: str
+    phone: str
+    name: str
+    city: str
 
 
-class RegisterUserResponse(AppModel):
+class RegisterUserResponse(BaseModel):
     email: str
 
 
 @router.post(
-    "/users", status_code=status.HTTP_201_CREATED, response_model=RegisterUserResponse
+    "/users",
+    status_code=status.HTTP_201_CREATED,
+    response_model=RegisterUserResponse,
 )
 def register_user(
-    input: RegisterUserRequest,
+    request: RegisterUserRequest,
     svc: Service = Depends(get_service),
-) -> dict[str, str]:
-    if svc.repository.get_user_by_email(input.email):
+) -> dict[str, str, str, str, str]:
+    if svc.repository.get_user_by_email(request.email):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email is already taken.",
         )
 
-    svc.repository.create_user(input.dict())
+    svc.repository.create_user(request.dict())
 
-    return RegisterUserResponse(email=input.email)
+    return RegisterUserResponse(email=request.email)

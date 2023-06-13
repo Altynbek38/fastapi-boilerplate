@@ -23,6 +23,7 @@ class GetMyAccountResponse(AppModel):
 def get_my_account(
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
-) -> dict[str, str]:
+) -> dict[str, str, str, str, str]:
     user = svc.repository.get_user_by_id(jwt_data.user_id)
-    return user
+    return {"message": f"{user}"}
+
