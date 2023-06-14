@@ -8,9 +8,6 @@ from . import router
 class RegisterUserRequest(BaseModel):
     email: str
     password: str
-    phone: str
-    name: str
-    city: str
 
 
 class RegisterUserResponse(BaseModel):
@@ -25,7 +22,7 @@ class RegisterUserResponse(BaseModel):
 def register_user(
     request: RegisterUserRequest,
     svc: Service = Depends(get_service),
-) -> dict[str, str, str, str, str]:
+):
     if svc.repository.get_user_by_email(request.email):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
