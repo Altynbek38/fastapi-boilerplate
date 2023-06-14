@@ -10,7 +10,6 @@ from . import router
 
 
 class Update(AppModel):
-    content: str
     type: str
     price: int
     address: str

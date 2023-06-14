@@ -9,7 +9,6 @@ from . import router
 
 class CreateTweetRequest(AppModel):
     user_id = str
-    content: str
     type: str
     price: int
     address: str

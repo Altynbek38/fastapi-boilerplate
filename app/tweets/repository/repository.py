@@ -12,7 +12,6 @@ class TweetRepository:
 
     def create_tweet(self, input: dict):
         payload = {
-            "content": input["content"],
             "user_id": ObjectId(input["user_id"]),
             "created_at": datetime.utcnow(),
             "type": input["type"],
@@ -47,7 +46,6 @@ class TweetRepository:
     def update_tweet(self, tweet_id: str, user_id: str, input_data: dict):
         update_data = {
             "$set": {
-                "content": input_data["content"],
                 "created_at": datetime.utcnow(),
                 "type": input_data["type"],
                 "price": input_data["price"],
