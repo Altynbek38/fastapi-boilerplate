@@ -14,7 +14,7 @@ class Config(BaseSettings):
     MONGOUSER: str = "root"
     MONGOPASSWORD: str = "password"
     MONGODATABASE: str = "fastapi"
-    MONGO_URL: str = ""
+    MONGO_URL: str = "mongodb+srv://altynbek4649:kazakh3855@cluster0.nf5qbgg.mongodb.net/"
 
 
 # environmental variables
