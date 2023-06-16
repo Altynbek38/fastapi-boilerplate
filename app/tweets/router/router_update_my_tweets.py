@@ -18,13 +18,15 @@ class Update(AppModel):
     description: str
 
 
-
-
 @router.patch("/shanyraks/{id}", status_code=200)
-def update_my_tweets(id: str, data: Update, svc: Service = Depends(get_service), jwt_data: JWTData = Depends(parse_jwt_user_data),):
+def update_my_tweets(
+    id: str,
+    data: Update,
+    svc: Service = Depends(get_service),
+    jwt_data: JWTData = Depends(parse_jwt_user_data),
+):
     try:
-        svc.repository.update_tweet(id, jwt_data.user_id ,data.dict())
+        svc.repository.update_tweet(id, jwt_data.user_id, data.dict())
         return {"message": "User data updated successfully"}
     except Exception:
         raise HTTPException(status_code=500, detail="Failed to update user data")
-

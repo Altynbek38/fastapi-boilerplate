@@ -28,7 +28,10 @@ class GetMyTweetsResponse(AppModel):
 
 
 @router.get("/shanyraks/{id}", status_code=200, response_model=GetMyTweetsResponse)
-def get_my_tweets(id: str, svc: Service = Depends(get_service), jwt_data: JWTData = Depends(parse_jwt_user_data),) -> dict[str, Any]:
+def get_my_tweets(
+    id: str,
+    svc: Service = Depends(get_service),
+    jwt_data: JWTData = Depends(parse_jwt_user_data),
+) -> dict[str, Any]:
     response = svc.repository.get_tweet_by_id(id, jwt_data.user_id)
     return response
-

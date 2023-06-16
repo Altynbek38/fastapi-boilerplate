@@ -5,8 +5,6 @@ from app.auth.adapters.jwt_service import JWTData
 from app.auth.router.dependencies import parse_jwt_user_data
 
 
-
-
 @router.delete("/shanyraks/{id}", status_code=200)
 def delete_tweet(
     id: str,
